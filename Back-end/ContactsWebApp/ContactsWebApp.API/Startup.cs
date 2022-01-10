@@ -22,6 +22,7 @@ namespace ContactsWebApp.API
         {
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
+            services.ConfigureUnitOfWork();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,11 +1,9 @@
-﻿using ContactsWebApp.DAL;
+﻿using ContactsWebApp.BLL.Repository;
+using ContactsWebApp.DAL;
+using ContactsWebApp.DAL.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ContactsWebApp.API.Extensions
 {
@@ -25,5 +23,8 @@ namespace ContactsWebApp.API.Extensions
                 services.AddDbContext<RepositoryContext>(opts =>
                     opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b =>
                         b.MigrationsAssembly("ContactsWebApp.API")));
+
+        public static void ConfigureUnitOfWork(this IServiceCollection services) =>
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

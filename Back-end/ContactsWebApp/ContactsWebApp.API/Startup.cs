@@ -1,4 +1,7 @@
 using ContactsWebApp.API.Extensions;
+using ContactsWebApp.API.Mapper;
+using ContactsWebApp.BLL.Interfaces;
+using ContactsWebApp.BLL.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,9 +23,13 @@ namespace ContactsWebApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUserService, UserService>();
+
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureUnitOfWork();
+            services.ConfigureValidators();
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,6 +1,9 @@
-﻿using ContactsWebApp.BLL.Repository;
+﻿using ContactsWebApp.API.Validators;
+using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.DAL;
 using ContactsWebApp.DAL.Repository;
+using ContactsWebApp.Shared.Dto;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,5 +29,10 @@ namespace ContactsWebApp.API.Extensions
 
         public static void ConfigureUnitOfWork(this IServiceCollection services) =>
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        public static void ConfigureValidators(this IServiceCollection services)
+        {
+            services.AddScoped<IValidator<RegisterRequestDto>, RegisterRequestValidator>();
+        }
     }
 }

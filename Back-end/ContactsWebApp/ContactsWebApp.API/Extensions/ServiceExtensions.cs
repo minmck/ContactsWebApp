@@ -1,5 +1,7 @@
 ﻿using ContactsWebApp.API.Validators;
+using ContactsWebApp.BLL.Interfaces;
 using ContactsWebApp.BLL.Repository;
+using ContactsWebApp.BLL.Services;
 using ContactsWebApp.DAL;
 using ContactsWebApp.DAL.Repository;
 using ContactsWebApp.Shared.Dto;
@@ -12,6 +14,14 @@ namespace ContactsWebApp.API.Extensions
 {
     public static class ServiceExtensions
     {
+        public static IServiceCollection ConfigureDependencyInjections(this IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+
+            return services;
+        }
+
         public static void ConfigureCors(this IServiceCollection services) =>
             services.AddCors(options =>
             {
@@ -33,6 +43,7 @@ namespace ContactsWebApp.API.Extensions
         public static void ConfigureValidators(this IServiceCollection services)
         {
             services.AddScoped<IValidator<RegisterRequestDto>, RegisterRequestValidator>();
+            services.AddScoped<IValidator<CreateContactDto>, CreateContactValidator>();
         }
     }
 }

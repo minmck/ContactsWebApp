@@ -25,6 +25,7 @@ namespace ContactsWebApp.BLL.Services
         public void CreateNewUser(User user)
         {
             _unitOfWork.User.CreateNewUser(user);
+            _unitOfWork.Save();
         }
 
         public bool UserValid(string email, string password)

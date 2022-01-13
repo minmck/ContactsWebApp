@@ -13,6 +13,8 @@ namespace ContactsWebApp.API.Mapper
                 .ForMember(r => r.FullName,
                     opt => opt.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
             CreateMap<User, LoginResponseDto>();
+            CreateMap<CreateContactDto, Contact>();
+            CreateMap<Contact, ContactDto>();
         }
     }
 }

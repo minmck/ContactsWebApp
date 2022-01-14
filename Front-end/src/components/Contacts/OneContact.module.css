@@ -1,0 +1,75 @@
+.contact-info {
+  border-radius: 12px;
+  border: 1px solid black;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.full-name input {
+  font-size: larger;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.icon {
+  position: relative;
+  top: 3px;
+}
+
+.data-field {
+  font-size: large;
+}
+
+.user-icon {
+  font-size: 90px;
+}
+
+.input {
+  margin-left: 0.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 0.3rem 0.2rem;
+}
+
+.input.disabled {
+  color: black;
+  background-color: transparent;
+  border: none;
+}
+
+.controls {
+  text-align: left;
+  margin-bottom: 0rem;
+}
+
+.controls button {
+  font: inherit;
+  color: white;
+  padding: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 5rem;
+  margin-right: 0.5rem;
+}
+
+.controls button:hover {
+  opacity: 0.8;
+}
+
+.controls button:active {
+  transform: translateY(1px);
+}
+
+.btn-edit {
+  background-color: rgb(14, 153, 207);
+}
+
+.btn-delete {
+  background-color: rgb(202, 48, 48);
+}

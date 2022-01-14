@@ -17,6 +17,7 @@ namespace ContactsWebApp.API.Extensions
         public static IServiceCollection ConfigureDependencyInjections(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             return services;
@@ -44,6 +45,7 @@ namespace ContactsWebApp.API.Extensions
         {
             services.AddScoped<IValidator<RegisterRequestDto>, RegisterRequestValidator>();
             services.AddScoped<IValidator<CreateContactDto>, CreateContactValidator>();
+            services.AddScoped<IValidator<UpdateContactDto>, UpdateContactValidator>();
         }
     }
 }

@@ -31,12 +31,33 @@ namespace ContactsWebApp.BLL.Services
             return _unitOfWork.Contact.FindContactsByUserId(userId);
         }
 
-        public void UpdateContact(int userId, int id, Contact contact)
+        public void UpdateContact(Contact contact)
         {
-            contact.UserId = userId;
-            contact.Id = id;
             _unitOfWork.Contact.UpdateContact(contact);
             _unitOfWork.Save();
+        }
+
+        public bool ContactsExist(int userId)
+        {
+            var contacts = _unitOfWork.Contact.FindContactsByUserId(userId);
+
+            if (contacts != null) return true;
+
+            return false;
+        }
+
+        public bool ContactExists(int id)
+        {
+            var contact = _unitOfWork.Contact.FindContactById(id);
+
+            if (contact != null) return true;
+
+            return false;
+        }
+
+        public Contact FindContactById(int id)
+        {
+            return _unitOfWork.Contact.FindContactById(id);
         }
     }
 }

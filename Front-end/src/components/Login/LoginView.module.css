@@ -1,0 +1,10 @@
+.login-view {
+  padding: 1.5rem;
+  margin: 4rem auto;
+  width: 50%;
+  max-width: 25rem;
+}
+
+.login-view__text {
+  font-family: inherit;
+}

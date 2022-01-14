@@ -1,0 +1,38 @@
+.new-contact {
+  padding: 1rem;
+  margin: 0.2rem auto;
+  width: 80%;
+  max-width: 35rem;
+}
+
+.new-contact__title {
+  margin-top: 0rem;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.new-contact__controls {
+  text-align: center;
+  margin-bottom: 0rem;
+}
+
+.new-contact__controls button {
+  font: inherit;
+  color: white;
+  background-color: #04aa6d;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 7rem;
+}
+
+.new-contact__controls button:hover {
+  opacity: 0.8;
+}
+
+.new-contact__controls button:active {
+  transform: translateY(1px);
+}

@@ -1,0 +1,14 @@
+.user-contacts {
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 80%;
+  max-width: 35rem;
+}
+
+.user-contacts__title {
+  margin-top: 0rem;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+}

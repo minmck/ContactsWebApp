@@ -1,0 +1,10 @@
+.registration-view {
+  padding: 1.5rem;
+  margin: 4rem auto;
+  width: 50%;
+  max-width: 25rem;
+}
+
+.registration-view__text {
+  font-family: inherit;
+}

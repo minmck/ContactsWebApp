@@ -15,6 +15,7 @@ namespace ContactsWebApp.API.Mapper
             CreateMap<User, LoginResponseDto>();
             CreateMap<CreateContactDto, Contact>();
             CreateMap<Contact, ContactDto>();
+            CreateMap<UpdateContactDto, Contact>();
         }
     }
 }

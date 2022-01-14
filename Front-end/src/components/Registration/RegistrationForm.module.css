@@ -1,0 +1,23 @@
+.registration-form__controls {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.registration-form__controls button {
+  font: inherit;
+  color: white;
+  background-color: #066cbe;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.registration-form__controls button:hover {
+  opacity: 0.8;
+}
+
+.registration-form__controls button:active {
+  transform: translateY(1px);
+}

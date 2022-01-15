@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace ContactsWebApp.API.Controllers
 {
-    [Route("api/users/[controller]")]
+    [Route("api/users/{userId}/[controller]")]
     [ApiController]
     [Authorize]
     public class ContactsController : ControllerBase
@@ -19,7 +19,8 @@ namespace ContactsWebApp.API.Controllers
         private readonly IValidator<CreateContactDto> _validatorCreate;
         private readonly IValidator<UpdateContactDto> _validatorUpdate;
 
-        public ContactsController(IMapper mapper, IContactService service, IValidator<CreateContactDto> validatorCreate, IValidator<UpdateContactDto> validatorUpdate)
+        public ContactsController(IMapper mapper, IContactService service, IValidator<CreateContactDto> validatorCreate,
+            IValidator<UpdateContactDto> validatorUpdate)
         {
             _mapper = mapper;
             _service = service;
@@ -28,25 +29,22 @@ namespace ContactsWebApp.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewContact([FromBody] CreateContactDto request)
+        public IActionResult CreateNewContact(int userId, [FromBody] CreateContactDto request)
         {
             var validationResult = _validatorCreate.Validate(request);
             if (!validationResult.IsValid)
                 return BadRequest();
 
             var contact = _mapper.Map<Contact>(request);
-            _service.CreateNewContact(contact);
+            _service.CreateNewContact(userId, contact);
 
             var contactDto = _mapper.Map<ContactDto>(contact);
             return Created(nameof(CreateNewContact), contactDto);
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ContactDto>> GetContactsByUserId(int userId)
+        public ActionResult<IEnumerable<ContactDto>> GetContacts(int userId)
         {
-            if (!_service.ContactsExist(userId))
-                return NotFound();
-
             var contacts = _service.FindContactsByUserId(userId);
             var response = _mapper.Map<IEnumerable<ContactDto>>(contacts);
             return Ok(response);
@@ -69,7 +67,7 @@ namespace ContactsWebApp.API.Controllers
             return Ok(contactDto);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {
             var contact = _service.FindContactById(id);

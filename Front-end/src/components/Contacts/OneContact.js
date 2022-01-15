@@ -1,14 +1,17 @@
 import styles from "./OneContact.module.css";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
+import { getUserId, getToken } from "../../utils/Common";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import DisableableInput from "../UI/DisableableInput";
+import axios from "axios";
 
 const OneContact = (props) => {
-    const [disabled, setDisabled] = useState('true');
+    const [disabled, setDisabled] = useState(true);
     const [fullName, setFullName] = useState(props.contact.fullName);
     const [phoneNumber, setPhoneNumber] = useState(props.contact.phoneNumber);
     const [email, setEmail] = useState(props.contact.email);
+    const id = props.contact.id;
 
     const handleFullNameChange = (value) => {
         setFullName(value);
@@ -30,15 +33,15 @@ const OneContact = (props) => {
     };
 
     const enableInput = () => {
-        setDisabled('');
+        setDisabled(false);
     };
 
     const disableInput = () => {
-        setDisabled('true');
+        setDisabled(true);
     };
 
     const editOrSave = () => {
-        if (disabled === 'true') {
+        if (disabled) {
             enableInput();
         } else {
             disableInput();
@@ -47,8 +50,19 @@ const OneContact = (props) => {
     };
 
     const deleteOrCancel = () => {
-        if (disabled === 'true') {
-            // Send delete request
+        if (disabled) {
+            axios.delete("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, {
+                headers: {
+                    'Authorization': 'Bearer ' + getToken()
+                }
+            }).then(response => {
+                if (response.status === 200) {
+                    props.onRefresh();
+                }
+                console.log("response: ", response);
+            }).catch(error => {
+                console.log('errors: ', error.response);
+            })
         } else {
             resetUserChanges();
             disableInput();

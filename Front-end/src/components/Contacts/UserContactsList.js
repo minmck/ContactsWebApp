@@ -1,55 +1,37 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getUserId, getToken } from "../../utils/Common";
 import Card from "../UI/Card";
 import OneContact from "./OneContact";
 import styles from "./UserContactsList.module.css";
 
 const UserContactsList = () => {
-
-    const contacts = [];
+    const [contacts, setContacts] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:35549/api/contacts", {
-            params: {
-                userId: getUserId()
-            },
+        axios.get("http://localhost:35549/api/users/" + getUserId() + "/contacts", {
             headers: {
                 'Authorization': 'Bearer ' + getToken()
             }
         }).then(response => {
-            contacts = response.data;
+            console.log("response: ", response);
+            setContacts(response.data);
         }).catch(error => {
             console.log('errors: ', error.response);
         })
-    });
+    }, []);
 
-    // const contacts = [
-    //     {
-    //         id: 1,
-    //         fullName: 'Vardenis Pavardenis',
-    //         phoneNumber: '1234567890',
-    //         email: 'email@email.com'
-    //     },
-    //     {
-    //         id: 2,
-    //         fullName: 'Jonas Jonaitis',
-    //         phoneNumber: '0987651',
-    //         email: 'mail@mail.lt'
-    //     },
-    //     {
-    //         id: 3,
-    //         fullName: 'Petras Petraitis',
-    //         phoneNumber: '55511132',
-    //         email: 'petras@mail.lt'
-    //     }
-    // ]
+    const refreshHandler = () => {
+        setRefresh(true);
+        console.log('refresh');
+    };
 
     return (
         <Card className={styles['user-contacts']}>
             <p className={styles['user-contacts__title']}>My contacts:</p>
             {contacts.map(function (contact) {
-                return <OneContact contact={contact} key={contact.id} />
+                return <OneContact contact={contact} key={contact.id} onRefresh={refreshHandler} />
             })}
         </Card>
     );

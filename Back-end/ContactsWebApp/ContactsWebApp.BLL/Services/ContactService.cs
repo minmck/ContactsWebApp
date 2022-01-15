@@ -14,8 +14,9 @@ namespace ContactsWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void CreateNewContact(Contact contact)
+        public void CreateNewContact(int userId, Contact contact)
         {
+            contact.UserId = userId;
             _unitOfWork.Contact.CreateNewContact(contact);
             _unitOfWork.Save();
         }

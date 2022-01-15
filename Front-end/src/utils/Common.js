@@ -15,3 +15,9 @@ export const getFirstName = () => {
 export const getToken = () => {
     return sessionStorage.getItem("token") || null;
 }
+
+export const removeUserSession = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("firstName");
+}

@@ -5,7 +5,7 @@ namespace ContactsWebApp.BLL.Interfaces
 {
     public interface IContactService
     {
-        void CreateNewContact(Contact contact);
+        void CreateNewContact(int userId, Contact contact);
         IEnumerable<Contact> FindContactsByUserId(int userId);
         Contact FindContactById(int id);
         void UpdateContact(Contact contact);

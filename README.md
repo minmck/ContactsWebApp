@@ -2,7 +2,7 @@
 
 A simple web application (React.js + .NET 5) where user can create an account, login and add, update and delete contacts.
 
-.NET part was coded with best practices in mind:
+.NET part was coded with best practices in mind, so it contains:
 - Three layer architecture.
 - Dependency injection.
 - Repository pattern.

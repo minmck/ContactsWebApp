@@ -45,7 +45,25 @@ const OneContact = (props) => {
             enableInput();
         } else {
             disableInput();
-            // Send update request 
+
+            const data = {
+                fullName: fullName,
+                phoneNumber: phoneNumber,
+                email: email
+            }
+
+            axios.put("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + getToken()
+                }
+            }).then(response => {
+                if (response.status === 200) {
+                    props.onRefresh();
+                }
+                console.log("response: ", response);
+            }).catch(error => {
+                console.log('errors: ', error.response);
+            })
         }
     };
 

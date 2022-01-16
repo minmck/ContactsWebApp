@@ -32,8 +32,10 @@ namespace ContactsWebApp.BLL.Services
             return _unitOfWork.Contact.FindContactsByUserId(userId);
         }
 
-        public void UpdateContact(Contact contact)
+        public void UpdateContact(int id, int userId, Contact contact)
         {
+            contact.Id = id;
+            contact.UserId = userId;
             _unitOfWork.Contact.UpdateContact(contact);
             _unitOfWork.Save();
         }

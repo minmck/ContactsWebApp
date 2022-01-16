@@ -20,11 +20,14 @@ const UserContactsList = () => {
         }).catch(error => {
             console.log('errors: ', error.response);
         })
-    }, []);
+    }, [refresh]);
 
     const refreshHandler = () => {
-        setRefresh(true);
-        console.log('refresh');
+        if (refresh) {
+            setRefresh(false);
+        } else {
+            setRefresh(true);
+        }
     };
 
     return (

@@ -50,10 +50,10 @@ namespace ContactsWebApp.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        public IActionResult UpdateContact([FromBody] UpdateContactDto request)
+        [HttpPut("{id}")]
+        public IActionResult UpdateContact(int id, int userId, [FromBody] UpdateContactDto request)
         {
-            if (!_service.ContactExists(request.Id))
+            if (!_service.ContactExists(id))
                 return NotFound();
 
             var validationResult = _validatorUpdate.Validate(request);
@@ -61,7 +61,7 @@ namespace ContactsWebApp.API.Controllers
                 return BadRequest();
 
             var contact = _mapper.Map<Contact>(request);
-            _service.UpdateContact(contact);
+            _service.UpdateContact(id, userId, contact);
 
             var contactDto = _mapper.Map<ContactDto>(contact);
             return Ok(contactDto);

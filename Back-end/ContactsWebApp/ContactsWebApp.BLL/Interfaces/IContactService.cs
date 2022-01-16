@@ -8,7 +8,7 @@ namespace ContactsWebApp.BLL.Interfaces
         void CreateNewContact(int userId, Contact contact);
         IEnumerable<Contact> FindContactsByUserId(int userId);
         Contact FindContactById(int id);
-        void UpdateContact(Contact contact);
+        void UpdateContact(int id, int userId, Contact contact);
         void DeleteContact(Contact contact);
         bool ContactsExist(int userId);
         bool ContactExists(int id);

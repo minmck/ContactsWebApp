@@ -11,6 +11,7 @@ A simple web application (React.js + ASP.NET Core) where user can create an acco
 React.js part was created from separate and reusable components.
 
 ## Technologies
+- .NET 5.
 - Entity framework core.
 - Microsoft SQL server.
 - User authentication with JWT token.

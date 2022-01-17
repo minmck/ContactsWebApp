@@ -7,7 +7,23 @@ A simple web application (React.js + .NET 5) where user can create an account, l
 - Dependency injection.
 - Repository pattern.
 - DTOs to transfer data.
-- User authentication with JWT token.
-- Entity framework core.
 
 React.js part was created from separate and reusable components.
+
+## Technologies
+- Entity framework core.
+- Microsoft SQL server.
+- User authentication with JWT token.
+- Axios for HTTP requests.
+
+## Launch
+To run the front-end part, open the solution with visual studio code, then run commands on a terminal:
+```
+$ npm install
+$ npm start
+```
+To run the back-end part, first start MS SQL Server, then open the solution with visual studio and run this command on Package Manager Console to create a database:
+```
+PM> update-database
+```
+If you run the project now, everything should work.

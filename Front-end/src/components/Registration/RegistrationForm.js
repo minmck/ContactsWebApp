@@ -16,6 +16,7 @@ const RegistrationForm = () => {
     const [emailInvalid, setEmailInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [userExists, setUserExists] = useState(false);
     const history = useHistory();
 
     const submitHandler = (event) => {
@@ -34,6 +35,9 @@ const RegistrationForm = () => {
                 }
                 console.log('response: ', response);
             }).catch(error => {
+                if (error.response.status === 409) {
+                    setUserExists(true);
+                }
                 console.log('errors: ', error.response);
             })
         }
@@ -98,8 +102,13 @@ const RegistrationForm = () => {
     };
 
     const closeModal = () => {
-        setSuccess(false);
-        history.push('/login');
+        if (success) {
+            setSuccess(false);
+            history.push('/login');
+        }
+        if (userExists) {
+            setUserExists(false);
+        }
     }
 
     return (
@@ -139,6 +148,7 @@ const RegistrationForm = () => {
                 />
             </div>
             {success && <InfoModal message="User created successfully. Please login." onClick={closeModal} />}
+            {userExists && <InfoModal message="User with this email already exists." onClick={closeModal} />}
             <div className={styles['registration-form__controls']}>
                 <button type='submit'>Register</button>
             </div>

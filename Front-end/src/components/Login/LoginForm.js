@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { setUserSession } from "../../utils/Common";
 import { emailIsValid, textIsValid } from "../../utils/Validation";
+import InfoModal from "../UI/InfoModal";
 import UserInput from "../UI/UserInput";
 import styles from "./LoginForm.module.css";
 
@@ -11,6 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [emailInvalid, setEmailInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [unauthorized, setUnauthorized] = useState(false);
     const history = useHistory();
 
     const submitHandler = (event) => {
@@ -28,6 +30,7 @@ const Login = () => {
                 }
                 console.log('response: ', response);
             }).catch(error => {
+                setUnauthorized(true);
                 console.log('errors: ', error.response);
             })
         }
@@ -69,6 +72,10 @@ const Login = () => {
         setPasswordInvalid(false);
     };
 
+    const closeModal = () => {
+        setUnauthorized(false);
+    }
+
     return (
         <form onSubmit={submitHandler}>
             <div>
@@ -89,6 +96,7 @@ const Login = () => {
                     errorMessage="Please enter your password."
                 />
             </div>
+            {unauthorized && <InfoModal message="Email or password is incorrect." onClick={closeModal} />}
             <div className={styles['login-form__controls']}>
                 <button type='submit'>Login</button>
             </div>

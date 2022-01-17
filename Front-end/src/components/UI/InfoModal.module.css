@@ -9,12 +9,10 @@
 }
 
 .modal {
-  position: fixed;
-  top: 30vh;
-  left: 30%;
-  width: 40%;
-  z-index: 100;
-  overflow: hidden;
+  padding: 1.5rem;
+  margin: 10% auto;
+  width: 50%;
+  max-width: 20rem;
 }
 
 .modal p {

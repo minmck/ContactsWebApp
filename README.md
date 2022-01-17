@@ -15,7 +15,7 @@ React.js part was created from separate and reusable components.
 - Entity framework core.
 - Microsoft SQL server.
 - User authentication with JWT token.
-- Axios for HTTP requests.
+- Axios library for HTTP requests.
 
 ## Launch
 To run the front-end part, open the solution with visual studio code, then run commands on a terminal:

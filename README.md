@@ -27,4 +27,4 @@ To run the back-end part, first start MS SQL Server, then open the solution with
 ```
 PM> update-database
 ```
-If you run the project now, everything should work.
+Should work now.

@@ -23,7 +23,7 @@ To run the front-end part, open the solution with visual studio code, then run c
 $ npm install
 $ npm start
 ```
-To run the back-end part, first start MS SQL Server, then open the solution with visual studio and run this command on Package Manager Console to create a database:
+To run the back-end part, first start MS SQL Server, then open the solution with visual studio and run the command on Package Manager Console to create a database:
 ```
 PM> update-database
 ```

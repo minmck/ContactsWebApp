@@ -27,4 +27,3 @@ To run the back-end part, first start MS SQL Server, then open the solution with
 ```
 PM> update-database
 ```
-Should work now.

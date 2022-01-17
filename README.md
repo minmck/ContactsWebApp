@@ -1,6 +1,6 @@
 # ContactsWebApp
 
-A simple web application (React.js + .NET 5) where user can create an account, login and add, update and delete contacts.
+A simple web application (React.js + ASP.NET Core) where user can create an account, login and add, update and delete contacts.
 
 .NET part was coded with best practices in mind, so it contains:
 - Three layer architecture.

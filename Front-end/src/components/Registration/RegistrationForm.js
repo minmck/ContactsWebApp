@@ -28,20 +28,21 @@ const RegistrationForm = () => {
         }
 
         if (formIsValid()) {
-            axios.post("http://localhost:35549/api/register", data,
-            ).then(response => {
-                if (response.status === 201) {
-                    setSuccess(true);
-                }
-                console.log('response: ', response);
-            }).catch(error => {
-                if (error.response.status === 409) {
-                    setUserExists(true);
-                }
-                console.log('errors: ', error.response);
-            })
+            registerRequest(data);
         }
         event.preventDefault();
+    };
+
+    const registerRequest = async (data) => {
+        try {
+            const response = await axios.post("http://localhost:35549/api/register", data);
+            console.log('response: ', response);
+            if (response.status === 201) {
+                setSuccess(true);
+            }
+        } catch (error) {
+            console.log('error: ', error);
+        }
     };
 
     const handleFirstNameChange = (value) => {

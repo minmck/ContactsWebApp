@@ -51,39 +51,48 @@ const OneContact = (props) => {
                 phoneNumber: phoneNumber,
                 email: email
             }
-
-            axios.put("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, data, {
-                headers: {
-                    'Authorization': 'Bearer ' + getToken()
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    props.onRefresh();
-                }
-                console.log("response: ", response);
-            }).catch(error => {
-                console.log('errors: ', error.response);
-            })
+            updateContactRequest(data);
         }
     };
 
     const deleteOrCancel = () => {
         if (disabled) {
-            axios.delete("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, {
-                headers: {
-                    'Authorization': 'Bearer ' + getToken()
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    props.onRefresh();
-                }
-                console.log("response: ", response);
-            }).catch(error => {
-                console.log('errors: ', error.response);
-            })
+            deleteContactRequest();
         } else {
             resetUserChanges();
             disableInput();
+        }
+    };
+
+    const updateContactRequest = async (data) => {
+        try {
+            const response = await axios.put("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, data, {
+                headers: {
+                    'Authorization': 'Bearer ' + getToken()
+                }
+            });
+            console.log('response: ', response);
+            if (response.status === 200) {
+                props.onRefresh();
+            }
+        } catch (error) {
+            console.log('errors: ', error.response);
+        }
+    };
+
+    const deleteContactRequest = async () => {
+        try {
+            const response = await axios.delete("http://localhost:35549/api/users/" + getUserId() + "/contacts/" + id, {
+                headers: {
+                    'Authorization': 'Bearer ' + getToken()
+                }
+            });
+            console.log("response: ", response);
+            if (response.status === 200) {
+                props.onRefresh();
+            }
+        } catch (error) {
+            console.log('errors: ', error.response);
         }
     };
 

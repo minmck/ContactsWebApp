@@ -23,20 +23,25 @@ const NewContactForm = () => {
         }
 
         if (formIsValid()) {
-            axios.post("http://localhost:35549/api/users/" + getUserId() + "/contacts", data, {
+            getContactsRequest(data);
+        } else {
+            event.preventDefault();
+        }
+    };
+
+    const getContactsRequest = async (data) => {
+        try {
+            const response = await axios.post("http://localhost:35549/api/users/" + getUserId() + "/contacts", data, {
                 headers: {
                     'Authorization': 'Bearer ' + getToken()
                 }
-            }).then(response => {
-                if (response.status === 201) {
-                }
+            });
+            console.log('response: ', response);
+            if (response.status === 201) {
                 setRefresh();
-                console.log('response: ', response);
-            }).catch(error => {
-                console.log('errors: ', error.response);
-            })
-        } else {
-            event.preventDefault();
+            }
+        } catch (error) {
+            console.log('error: ', error);
         }
     };
 

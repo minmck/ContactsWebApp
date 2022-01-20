@@ -22,19 +22,22 @@ const Login = () => {
         }
 
         if (formIsValid()) {
-            axios.post("http://localhost:35549/api/login", data,
-            ).then(response => {
-                if (response.status === 200) {
-                    setUserSession(response.data.token, response.data.id, response.data.firstName);
-                    history.push('/home');
-                }
-                console.log('response: ', response);
-            }).catch(error => {
-                setUnauthorized(true);
-                console.log('errors: ', error.response);
-            })
+            loginRequest(data);
         }
         event.preventDefault();
+    };
+
+    const loginRequest = async (data) => {
+        try {
+            const response = await axios.post("http://localhost:35549/api/login", data);
+            console.log('response: ', response);
+            if (response.status === 200) {
+                setUserSession(response.data.token, response.data.id, response.data.firstName);
+                history.push('/home');
+            }
+        } catch (error) {
+            console.log('error: ', error);
+        }
     };
 
     const handleEmailChange = (value) => {

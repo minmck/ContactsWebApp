@@ -1,6 +1,6 @@
 # ContactsWebApp
 
-A simple web application (React.js + ASP.NET Core API) where user can create an account, login and add, update and delete contacts.
+A simple web application (React + .NET) where user can create an account, login and add, update and delete contacts.
 
 .NET part was coded with best practices in mind, so it contains:
 - Three layer architecture.
@@ -12,9 +12,10 @@ A simple web application (React.js + ASP.NET Core API) where user can create an 
 React.js part was created from separate and reusable components.
 
 ## Technologies
+- React.
 - ASP.NET Core API.
 - Entity framework core.
-- Microsoft SQL server.
+- Microsoft SQL.
 - User authentication with JWT token.
 - Axios library for HTTP requests.
 

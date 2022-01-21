@@ -1,16 +1,17 @@
 ﻿using ContactsWebApp.Shared.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Interfaces
 {
     public interface IContactService
     {
-        void CreateNewContact(int userId, Contact contact);
-        IEnumerable<Contact> FindContactsByUserId(int userId);
-        Contact FindContactById(int id);
-        void UpdateContact(int id, int userId, Contact contact);
-        void DeleteContact(Contact contact);
-        bool ContactsExist(int userId);
-        bool ContactExists(int id);
+        Task CreateNewContactAsync(int userId, Contact contact);
+        Task<IEnumerable<Contact>> FindContactsByUserIdAsync(int userId);
+        Task<Contact> FindContactByIdAsync(int id);
+        Task UpdateContactAsync(int id, int userId, Contact contact);
+        Task DeleteContactAsync(Contact contact);
+        Task<bool> ContactsExistAsync(int userId);
+        Task<bool> ContactExistsAsync(int id);
     }
 }

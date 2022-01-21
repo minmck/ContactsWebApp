@@ -5,6 +5,7 @@ using ContactsWebApp.Shared.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.API.Controllers
 {
@@ -24,9 +25,9 @@ namespace ContactsWebApp.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewUser([FromBody] RegisterRequestDto request)
+        public async Task<IActionResult> CreateNewUser([FromBody] RegisterRequestDto request)
         {
-            if (_service.UserExists(request.Email))
+            if (await _service.UserExistsAsync(request.Email))
                 return StatusCode(StatusCodes.Status409Conflict);
 
             var validationResult = _validator.Validate(request);
@@ -34,7 +35,7 @@ namespace ContactsWebApp.API.Controllers
                 return BadRequest();
 
             var user = _mapper.Map<User>(request);
-            _service.CreateNewUser(user);
+            await _service.CreateNewUserAsync(user);
 
             var response = _mapper.Map<RegisterResponseDto>(user);
             return Created(nameof(CreateNewUser), response);

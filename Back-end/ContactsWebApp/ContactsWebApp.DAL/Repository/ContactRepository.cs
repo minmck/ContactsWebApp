@@ -1,7 +1,9 @@
 ﻿using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.Shared.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.DAL.Repository
 {
@@ -21,14 +23,14 @@ namespace ContactsWebApp.DAL.Repository
             Delete(contact);
         }
 
-        public Contact FindContactById(int id)
+        public async Task<Contact> FindContactByIdAsync(int id)
         {
-            return FindByCondition(x => x.Id.Equals(id)).SingleOrDefault();
+            return await FindByCondition(x => x.Id.Equals(id)).SingleOrDefaultAsync();
         }
 
-        public IEnumerable<Contact> FindContactsByUserId(int userId)
+        public async Task<IEnumerable<Contact>> FindContactsByUserIdAsync(int userId)
         {
-            return FindByCondition(x => x.UserId.Equals(userId));
+            return await FindByCondition(x => x.UserId.Equals(userId)).ToListAsync();
         }
 
         public void UpdateContact(Contact contact)

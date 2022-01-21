@@ -2,6 +2,7 @@
 using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.Shared.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Services
 {
@@ -14,53 +15,53 @@ namespace ContactsWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void CreateNewContact(int userId, Contact contact)
+        public async Task CreateNewContactAsync(int userId, Contact contact)
         {
             contact.UserId = userId;
             _unitOfWork.Contact.CreateNewContact(contact);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public void DeleteContact(Contact contact)
+        public async Task DeleteContactAsync(Contact contact)
         {
             _unitOfWork.Contact.DeleteContact(contact);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public IEnumerable<Contact> FindContactsByUserId(int userId)
+        public async Task<IEnumerable<Contact>> FindContactsByUserIdAsync(int userId)
         {
-            return _unitOfWork.Contact.FindContactsByUserId(userId);
+            return await _unitOfWork.Contact.FindContactsByUserIdAsync(userId);
         }
 
-        public void UpdateContact(int id, int userId, Contact contact)
+        public async Task UpdateContactAsync(int id, int userId, Contact contact)
         {
             contact.Id = id;
             contact.UserId = userId;
             _unitOfWork.Contact.UpdateContact(contact);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public bool ContactsExist(int userId)
+        public async Task<bool> ContactsExistAsync(int userId)
         {
-            var contacts = _unitOfWork.Contact.FindContactsByUserId(userId);
+            var contacts = await _unitOfWork.Contact.FindContactsByUserIdAsync(userId);
 
             if (contacts != null) return true;
 
             return false;
         }
 
-        public bool ContactExists(int id)
+        public async Task<bool> ContactExistsAsync(int id)
         {
-            var contact = _unitOfWork.Contact.FindContactById(id);
+            var contact = await _unitOfWork.Contact.FindContactByIdAsync(id);
 
             if (contact != null) return true;
 
             return false;
         }
 
-        public Contact FindContactById(int id)
+        public async Task<Contact> FindContactByIdAsync(int id)
         {
-            return _unitOfWork.Contact.FindContactById(id);
+            return await _unitOfWork.Contact.FindContactByIdAsync(id);
         }
     }
 }

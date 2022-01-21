@@ -1,4 +1,5 @@
 ﻿using ContactsWebApp.BLL.Repository;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.DAL.Repository
 {
@@ -35,9 +36,9 @@ namespace ContactsWebApp.DAL.Repository
             }
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _repositoryContext.SaveChanges();
+            await _repositoryContext.SaveChangesAsync();
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using ContactsWebApp.Shared.Entities;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Interfaces
 {
     public interface IUserService
     {
-        bool UserExists(string email);
-        void CreateNewUser(User user);
-        bool UserValid(string email, string password);
-        User FindUserByEmail(string email);
+        Task<bool> UserExistsAsync(string email);
+        Task CreateNewUserAsync(User user);
+        Task<bool> UserValidAsync(string email, string password);
+        Task<User> FindUserByEmailAsync(string email);
     }
 }

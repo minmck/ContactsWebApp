@@ -3,6 +3,7 @@ using ContactsWebApp.BLL.Interfaces;
 using ContactsWebApp.Shared.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.API.Controllers
 {
@@ -23,12 +24,12 @@ namespace ContactsWebApp.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] LoginRequestDto request)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            if (!_serviceUser.UserValid(request.Email, request.Password))
+            if (!await _serviceUser.UserValidAsync(request.Email, request.Password))
                 return Unauthorized();
 
-            var user = _serviceUser.FindUserByEmail(request.Email);
+            var user = await _serviceUser.FindUserByEmailAsync(request.Email);
             var response = _mapper.Map<LoginResponseDto>(user);
 
             response.Token = _serviceAuthenticate.GenerateJwtToken(user);

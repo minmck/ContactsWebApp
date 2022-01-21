@@ -7,6 +7,7 @@ A simple web application (React.js + ASP.NET Core API) where user can create an 
 - Dependency injection.
 - Repository pattern.
 - DTOs to transfer data.
+- Asynchronous code.
 
 React.js part was created from separate and reusable components.
 

@@ -6,6 +6,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.API.Controllers
 {
@@ -29,31 +30,31 @@ namespace ContactsWebApp.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewContact(int userId, [FromBody] CreateContactDto request)
+        public async Task<IActionResult> CreateNewContact(int userId, [FromBody] CreateContactDto request)
         {
             var validationResult = _validatorCreate.Validate(request);
             if (!validationResult.IsValid)
                 return BadRequest();
 
             var contact = _mapper.Map<Contact>(request);
-            _service.CreateNewContact(userId, contact);
+            await _service.CreateNewContactAsync(userId, contact);
 
             var contactDto = _mapper.Map<ContactDto>(contact);
             return Created(nameof(CreateNewContact), contactDto);
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ContactDto>> GetContacts(int userId)
+        public async Task<ActionResult<IEnumerable<ContactDto>>> GetContacts(int userId)
         {
-            var contacts = _service.FindContactsByUserId(userId);
+            var contacts = await _service.FindContactsByUserIdAsync(userId);
             var response = _mapper.Map<IEnumerable<ContactDto>>(contacts);
             return Ok(response);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateContact(int id, int userId, [FromBody] UpdateContactDto request)
+        public async Task<IActionResult> UpdateContact(int id, int userId, [FromBody] UpdateContactDto request)
         {
-            if (!_service.ContactExists(id))
+            if (!await _service.ContactExistsAsync(id))
                 return NotFound();
 
             var validationResult = _validatorUpdate.Validate(request);
@@ -61,17 +62,17 @@ namespace ContactsWebApp.API.Controllers
                 return BadRequest();
 
             var contact = _mapper.Map<Contact>(request);
-            _service.UpdateContact(id, userId, contact);
+            await _service.UpdateContactAsync(id, userId, contact);
 
             var contactDto = _mapper.Map<ContactDto>(contact);
             return Ok(contactDto);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteContact(int id)
+        public async Task<IActionResult> DeleteContact(int id)
         {
-            var contact = _service.FindContactById(id);
-            _service.DeleteContact(contact);
+            var contact = await _service.FindContactByIdAsync(id);
+            await _service.DeleteContactAsync(contact);
 
             return Ok();
         }

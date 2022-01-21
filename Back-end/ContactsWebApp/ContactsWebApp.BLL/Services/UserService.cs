@@ -1,6 +1,7 @@
 ﻿using ContactsWebApp.BLL.Interfaces;
 using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.Shared.Entities;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Services
 {
@@ -13,33 +14,33 @@ namespace ContactsWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public bool UserExists(string email)
+        public async Task<bool> UserExistsAsync(string email)
         {
-            var user = FindUserByEmail(email);
+            var user = await FindUserByEmailAsync(email);
 
             if (user != null) return true;
 
             return false;
         }
 
-        public void CreateNewUser(User user)
+        public async Task CreateNewUserAsync(User user)
         {
             _unitOfWork.User.CreateNewUser(user);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public bool UserValid(string email, string password)
+        public async Task<bool> UserValidAsync(string email, string password)
         {
-            var user = _unitOfWork.User.FindUserByEmailAndPassword(email, password);
+            var user = await _unitOfWork.User.FindUserByEmailAndPasswordAsync(email, password);
 
             if (user != null) return true;
 
             return false;
         }
 
-        public User FindUserByEmail(string email)
+        public async Task<User> FindUserByEmailAsync(string email)
         {
-            return _unitOfWork.User.FindUserByEmail(email);
+            return await _unitOfWork.User.FindUserByEmailAsync(email);
         }
     }
 }

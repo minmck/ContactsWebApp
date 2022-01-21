@@ -1,11 +1,12 @@
 ﻿using ContactsWebApp.Shared.Entities;
+using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Repository
 {
     public interface IUserRepository
     {
-        User FindUserByEmail(string email);
-        User FindUserByEmailAndPassword(string email, string password);
+        Task<User> FindUserByEmailAsync(string email);
+        Task<User> FindUserByEmailAndPasswordAsync(string email, string password);
         void CreateNewUser(User user);
     }
 }

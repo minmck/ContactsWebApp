@@ -36,6 +36,7 @@ const Login = () => {
                 history.push('/home');
             }
         } catch (error) {
+            setUnauthorized(true);
             console.log('error: ', error);
         }
     };

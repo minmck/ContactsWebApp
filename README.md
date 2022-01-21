@@ -6,8 +6,8 @@ A simple web application (React.js + ASP.NET Core API) where user can create an 
 - Three layer architecture.
 - Dependency injection.
 - Repository pattern.
-- DTOs to transfer data.
 - Asynchronous code.
+- DTOs to transfer data.
 
 React.js part was created from separate and reusable components.
 

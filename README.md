@@ -8,6 +8,7 @@ A simple web application (React + .NET) where user can create an account, login 
 - Repository pattern.
 - Asynchronous code.
 - DTOs to transfer data.
+- Unit tests.
 
 React.js part was created from separate and reusable components.
 

@@ -2,6 +2,7 @@
 using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.Shared.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContactsWebApp.BLL.Services
@@ -39,15 +40,6 @@ namespace ContactsWebApp.BLL.Services
             contact.UserId = userId;
             _unitOfWork.Contact.UpdateContact(contact);
             await _unitOfWork.SaveAsync();
-        }
-
-        public async Task<bool> ContactsExistAsync(int userId)
-        {
-            var contacts = await _unitOfWork.Contact.FindContactsByUserIdAsync(userId);
-
-            if (contacts != null) return true;
-
-            return false;
         }
 
         public async Task<bool> ContactExistsAsync(int id)

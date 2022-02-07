@@ -1,5 +1,4 @@
-﻿using Autofac.Extras.Moq;
-using ContactsWebApp.BLL.Repository;
+﻿using ContactsWebApp.BLL.Repository;
 using ContactsWebApp.BLL.Services;
 using ContactsWebApp.Shared.Entities;
 using Moq;

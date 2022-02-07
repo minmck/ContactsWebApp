@@ -11,7 +11,6 @@ namespace ContactsWebApp.BLL.Interfaces
         Task<Contact> FindContactByIdAsync(int id);
         Task UpdateContactAsync(int id, int userId, Contact contact);
         Task DeleteContactAsync(Contact contact);
-        Task<bool> ContactsExistAsync(int userId);
         Task<bool> ContactExistsAsync(int id);
     }
 }
